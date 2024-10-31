@@ -1,4 +1,4 @@
-package com.mycompany.odescleanzap
+package com.mycompany.odescleanwhatsapp
 
 import io.flutter.embedding.android.FlutterActivity
 

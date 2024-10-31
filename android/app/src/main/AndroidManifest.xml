@@ -1,12 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mycompany.odescleanzap"
+    package="com.mycompany.odescleanwhatsapp"
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
 
     <application
-        android:label="odesclean-zap"
+        android:label="Odesclean Whatsapp"
         tools:replace="android:label"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true">
@@ -46,7 +46,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="odescleanzap" android:host="odescleanzap.com" />
+                <data android:scheme="odescleanwhatsapp" android:host="odescleanwhatsapp.com" />
             </intent-filter>
 
         </activity>

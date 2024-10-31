@@ -385,7 +385,7 @@ class DispararCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Disparar',
       apiUrl:
-          'https://n8n.kodala.com.br/webhook-test/89bd9b05-a1cf-45ab-bb4b-38da9dc18ef4',
+          'https://webhook.kodala.com.br/webhook/89bd9b05-a1cf-45ab-bb4b-38da9dc18ef4',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
