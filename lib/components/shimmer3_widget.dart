@@ -265,45 +265,6 @@ class _Shimmer3WidgetState extends State<Shimmer3Widget>
           ),
         ],
       ),
-      'containerOnPageLoadAnimation19': AnimationInfo(
-        loop: true,
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          ShimmerEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            color: const Color(0x80FFFFFF),
-            angle: 0.524,
-          ),
-        ],
-      ),
-      'containerOnPageLoadAnimation20': AnimationInfo(
-        loop: true,
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          ShimmerEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            color: const Color(0x80FFFFFF),
-            angle: 0.524,
-          ),
-        ],
-      ),
-      'containerOnPageLoadAnimation21': AnimationInfo(
-        loop: true,
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          ShimmerEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            color: const Color(0x80FFFFFF),
-            angle: 0.524,
-          ),
-        ],
-      ),
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -319,7 +280,7 @@ class _Shimmer3WidgetState extends State<Shimmer3Widget>
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisSize: MainAxisSize.max,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           width: double.infinity,
@@ -688,68 +649,6 @@ class _Shimmer3WidgetState extends State<Shimmer3Widget>
                     alignment: const AlignmentDirectional(0.0, 0.0),
                   ).animateOnPageLoad(
                       animationsMap['containerOnPageLoadAnimation18']!),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Container(
-          width: double.infinity,
-          height: 100.0,
-          decoration: BoxDecoration(
-            color: FlutterFlowTheme.of(context).secondaryBackground,
-            borderRadius: BorderRadius.circular(20.0),
-            border: Border.all(
-              color: FlutterFlowTheme.of(context).alternate,
-            ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Flexible(
-                      child: Container(
-                        width: 150.0,
-                        height: 16.0,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).alternate,
-                          borderRadius: BorderRadius.circular(24.0),
-                        ),
-                        alignment: const AlignmentDirectional(0.0, 0.0),
-                      ).animateOnPageLoad(
-                          animationsMap['containerOnPageLoadAnimation19']!),
-                    ),
-                    Flexible(
-                      child: Container(
-                        width: 100.0,
-                        height: 16.0,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).alternate,
-                          borderRadius: BorderRadius.circular(24.0),
-                        ),
-                        alignment: const AlignmentDirectional(0.0, 0.0),
-                      ).animateOnPageLoad(
-                          animationsMap['containerOnPageLoadAnimation20']!),
-                    ),
-                  ].divide(const SizedBox(height: 8.0)),
-                ),
-                Flexible(
-                  child: Container(
-                    width: 75.0,
-                    height: 30.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).alternate,
-                      borderRadius: BorderRadius.circular(24.0),
-                    ),
-                    alignment: const AlignmentDirectional(0.0, 0.0),
-                  ).animateOnPageLoad(
-                      animationsMap['containerOnPageLoadAnimation21']!),
                 ),
               ],
             ),

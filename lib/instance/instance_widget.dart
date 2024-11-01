@@ -2,6 +2,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/components/approve_widget.dart';
 import '/components/drawer_widget.dart';
 import '/components/qr_widget.dart';
+import '/components/shimmer1_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -99,17 +100,7 @@ class _InstanceWidgetState extends State<InstanceWidget> {
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.
                             if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50.0,
-                                  height: 50.0,
-                                  child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                      FlutterFlowTheme.of(context).primary,
-                                    ),
-                                  ),
-                                ),
-                              );
+                              return const Shimmer1Widget();
                             }
                             final rowFechInstanceResponse = snapshot.data!;
 
@@ -942,119 +933,144 @@ class _InstanceWidgetState extends State<InstanceWidget> {
                                               ),
                                             ].divide(const SizedBox(width: 10.0)),
                                           ),
-                                        SizedBox(
-                                          width: double.infinity,
-                                          child: TextFormField(
-                                            controller:
-                                                _model.textController2 ??=
-                                                    TextEditingController(
-                                              text: FechInstanceCall.token(
-                                                rowFechInstanceResponse
-                                                    .jsonBody,
-                                              ),
-                                            ),
-                                            focusNode:
-                                                _model.textFieldFocusNode2,
-                                            autofocus: false,
-                                            readOnly: true,
-                                            obscureText:
-                                                !_model.passwordVisibility,
-                                            decoration: InputDecoration(
-                                              isDense: true,
-                                              labelStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                              hintText: 'TextField',
-                                              hintStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                              enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .alternate,
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(16.0),
-                                              ),
-                                              focusedBorder: OutlineInputBorder(
-                                                borderSide: const BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(16.0),
-                                              ),
-                                              errorBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(16.0),
-                                              ),
-                                              focusedErrorBorder:
-                                                  OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(16.0),
-                                              ),
-                                              filled: true,
-                                              fillColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
-                                              suffixIcon: InkWell(
-                                                onTap: () => safeSetState(
-                                                  () => _model
-                                                          .passwordVisibility =
-                                                      !_model
-                                                          .passwordVisibility,
-                                                ),
-                                                focusNode: FocusNode(
-                                                    skipTraversal: true),
-                                                child: Icon(
-                                                  _model.passwordVisibility
-                                                      ? Icons
-                                                          .visibility_outlined
-                                                      : Icons
-                                                          .visibility_off_outlined,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .alternate,
-                                                  size: 15.0,
-                                                ),
-                                              ),
-                                            ),
+                                        if (FechInstanceCall.status(
+                                              rowFechInstanceResponse.jsonBody,
+                                            ) !=
+                                            'open')
+                                          Text(
+                                            'Seu whatsapp está desconectado e as funções não irão funcionar! ',
+                                            textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
                                                   fontFamily: 'Inter',
                                                   letterSpacing: 0.0,
                                                 ),
-                                            cursorColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primaryText,
-                                            validator: _model
-                                                .textController2Validator
-                                                .asValidator(context),
                                           ),
-                                        ),
+                                        if (FechInstanceCall.status(
+                                              rowFechInstanceResponse.jsonBody,
+                                            ) ==
+                                            'open')
+                                          SizedBox(
+                                            width: double.infinity,
+                                            child: TextFormField(
+                                              controller:
+                                                  _model.textController2 ??=
+                                                      TextEditingController(
+                                                text: FechInstanceCall.token(
+                                                  rowFechInstanceResponse
+                                                      .jsonBody,
+                                                ),
+                                              ),
+                                              focusNode:
+                                                  _model.textFieldFocusNode2,
+                                              autofocus: false,
+                                              readOnly: true,
+                                              obscureText:
+                                                  !_model.passwordVisibility,
+                                              decoration: InputDecoration(
+                                                isDense: true,
+                                                labelStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                hintText: 'TextField',
+                                                hintStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .alternate,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          16.0),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: const BorderSide(
+                                                    color: Color(0x00000000),
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          16.0),
+                                                ),
+                                                errorBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .error,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          16.0),
+                                                ),
+                                                focusedErrorBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .error,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          16.0),
+                                                ),
+                                                filled: true,
+                                                fillColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryBackground,
+                                                suffixIcon: InkWell(
+                                                  onTap: () => safeSetState(
+                                                    () => _model
+                                                            .passwordVisibility =
+                                                        !_model
+                                                            .passwordVisibility,
+                                                  ),
+                                                  focusNode: FocusNode(
+                                                      skipTraversal: true),
+                                                  child: Icon(
+                                                    _model.passwordVisibility
+                                                        ? Icons
+                                                            .visibility_outlined
+                                                        : Icons
+                                                            .visibility_off_outlined,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .alternate,
+                                                    size: 15.0,
+                                                  ),
+                                                ),
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                              cursorColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              validator: _model
+                                                  .textController2Validator
+                                                  .asValidator(context),
+                                            ),
+                                          ),
                                         Container(
                                           width: double.infinity,
                                           height: 50.0,
@@ -1133,6 +1149,13 @@ class _InstanceWidgetState extends State<InstanceWidget> {
                                                                     ?.jsonBody ??
                                                                 ''),
                                                           )!,
+                                                          callback: () async {
+                                                            safeSetState(() =>
+                                                                _model.apiRequestCompleter =
+                                                                    null);
+                                                            await _model
+                                                                .waitForApiRequestCompleted();
+                                                          },
                                                         ),
                                                       ),
                                                     );
@@ -1167,7 +1190,7 @@ class _InstanceWidgetState extends State<InstanceWidget> {
                                                       MainAxisAlignment.center,
                                                   children: [
                                                     Icon(
-                                                      Icons.arrow_back,
+                                                      Icons.ads_click,
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -1175,7 +1198,7 @@ class _InstanceWidgetState extends State<InstanceWidget> {
                                                       size: 24.0,
                                                     ),
                                                     Text(
-                                                      'Conectar',
+                                                      'Clique para conectar',
                                                       style: FlutterFlowTheme
                                                               .of(context)
                                                           .bodyMedium
@@ -1202,7 +1225,7 @@ class _InstanceWidgetState extends State<InstanceWidget> {
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
                                               _model.apiResult6k55 =
-                                                  await CreateCall.call();
+                                                  await DeslogarCall.call();
 
                                               safeSetState(() => _model
                                                   .apiRequestCompleter = null);

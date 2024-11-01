@@ -10,6 +10,8 @@ class QrModel extends FlutterFlowModel<QrWidget> {
   InstantTimer? instantTimer;
   // Stores action output result for [Backend Call - API (Verify)] action in QR widget.
   ApiCallResponse? status;
+  // Stores action output result for [Backend Call - API (deslogar)] action in Text widget.
+  ApiCallResponse? apiResult6k55;
 
   @override
   void initState(BuildContext context) {}

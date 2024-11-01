@@ -34,7 +34,7 @@ class InstanceModel extends FlutterFlowModel<InstanceWidget> {
   String? Function(BuildContext, String?)? textController2Validator;
   // Stores action output result for [Backend Call - API (Conectar)] action in Container widget.
   ApiCallResponse? apiResult6k5;
-  // Stores action output result for [Backend Call - API (create)] action in Container widget.
+  // Stores action output result for [Backend Call - API (deslogar)] action in Container widget.
   ApiCallResponse? apiResult6k55;
 
   @override

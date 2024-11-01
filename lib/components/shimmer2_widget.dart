@@ -32,10 +32,11 @@ class _Shimmer2WidgetState extends State<Shimmer2Widget>
 
     animationsMap.addAll({
       'containerOnPageLoadAnimation': AnimationInfo(
+        loop: true,
         trigger: AnimationTrigger.onPageLoad,
         effectsBuilder: () => [
           ShimmerEffect(
-            curve: Curves.easeInOut,
+            curve: Curves.linear,
             delay: 0.0.ms,
             duration: 600.0.ms,
             color: const Color(0x80FFFFFF),
@@ -62,6 +63,11 @@ class _Shimmer2WidgetState extends State<Shimmer2Widget>
       height: 40.0,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).alternate,
+        borderRadius: BorderRadius.circular(8.0),
+        border: Border.all(
+          color: FlutterFlowTheme.of(context).alternate,
+          width: 0.0,
+        ),
       ),
     ).animateOnPageLoad(animationsMap['containerOnPageLoadAnimation']!);
   }

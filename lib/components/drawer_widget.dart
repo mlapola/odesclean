@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'drawer_model.dart';
 export 'drawer_model.dart';
@@ -67,11 +68,11 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  'assets/images/marca-odesclean-horizontal-fundo-claro-final.png',
+                SvgPicture.asset(
+                  'assets/images/marca-odesclean-horizontal-fundo-claro-final.svg',
                   width: 200.0,
                   height: 75.0,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fitWidth,
                 ),
               ],
             ),
@@ -257,7 +258,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                                     size: 12.0,
                                   ),
                                   Text(
-                                    'Agendamentos',
+                                    'Horários agendados',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -518,7 +519,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                                             ),
                                       ),
                                       Text(
-                                        'Qualquer dúvida não hesite em chamar',
+                                        'Qualquer dúvida não hesite em nos chamar',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -533,8 +534,9 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                                     ].divide(const SizedBox(height: 8.0)),
                                   ),
                                   FFButtonWidget(
-                                    onPressed: () {
-                                      print('Button pressed ...');
+                                    onPressed: () async {
+                                      await launchURL(
+                                          'https://api.whatsapp.com/send?phone=5541997387926');
                                     },
                                     text: 'Fale conosco',
                                     options: FFButtonOptions(

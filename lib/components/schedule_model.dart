@@ -5,6 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class ScheduleModel extends FlutterFlowModel<ScheduleWidget> {
+  ///  Local state fields for this component.
+
+  int type = 1;
+
+  String? uploadedImageBase64;
+
   ///  State fields for stateful widgets in this component.
 
   final formKey = GlobalKey<FormState>();

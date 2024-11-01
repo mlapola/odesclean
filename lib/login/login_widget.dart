@@ -1,9 +1,12 @@
 import '/auth/supabase_auth/auth_util.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'login_model.dart';
 export 'login_model.dart';
 
@@ -14,10 +17,13 @@ class LoginWidget extends StatefulWidget {
   State<LoginWidget> createState() => _LoginWidgetState();
 }
 
-class _LoginWidgetState extends State<LoginWidget> {
+class _LoginWidgetState extends State<LoginWidget>
+    with TickerProviderStateMixin {
   late LoginModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -29,6 +35,22 @@ class _LoginWidgetState extends State<LoginWidget> {
 
     _model.passTextController ??= TextEditingController();
     _model.passFocusNode ??= FocusNode();
+
+    animationsMap.addAll({
+      'imageOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          TintEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 860.0.ms,
+            color: FlutterFlowTheme.of(context).secondaryBackground,
+            begin: 1.0,
+            end: 0.0,
+          ),
+        ],
+      ),
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -87,13 +109,14 @@ class _LoginWidgetState extends State<LoginWidget> {
                             padding: const EdgeInsets.all(16.0),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
-                              child: Image.asset(
-                                'assets/images/marca-odesclean-horizontal-fundo-claro-final.png',
-                                width: 200.0,
+                              child: SvgPicture.asset(
+                                'assets/images/marca-odesclean-horizontal-fundo-claro-final.svg',
+                                width: 250.0,
                                 height: 50.0,
-                                fit: BoxFit.cover,
+                                fit: BoxFit.fitWidth,
                               ),
-                            ),
+                            ).animateOnPageLoad(
+                                animationsMap['imageOnPageLoadAnimation']!),
                           ),
                           Align(
                             alignment: const AlignmentDirectional(-1.0, 0.0),

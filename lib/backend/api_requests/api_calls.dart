@@ -176,10 +176,10 @@ class ChangeConfigCall {
       ));
 }
 
-class CreateCall {
+class DeslogarCall {
   static Future<ApiCallResponse> call() async {
     return ApiManager.instance.makeApiCall(
-      callName: 'create',
+      callName: 'deslogar',
       apiUrl: 'https://evolution.kodala.com.br/instance/logout/Odesclean',
       callType: ApiCallType.DELETE,
       headers: {
@@ -250,6 +250,15 @@ class GoogleSheetsCall {
   static List<String>? numeros(dynamic response) => (getJsonField(
         response,
         r'''$.values[:][1]''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? nomes(dynamic response) => (getJsonField(
+        response,
+        r'''$.values[:][0]''',
         true,
       ) as List?)
           ?.withoutNulls
@@ -340,14 +349,19 @@ class AgendarMensagemCall {
   static Future<ApiCallResponse> call({
     String? date = '',
     String? message = '',
-    String? numbers = '',
+    dynamic contactJson,
+    String? type = '',
+    String? base64 = '',
   }) async {
+    final contact = _serializeJson(contactJson);
     final ffApiRequestBody = '''
 {
   "date": "$date",
   "name": "Odesclean",
   "message": "$message",
-  "numbers": "$numbers"
+  "numbers": $contact,
+  "type": "$type",
+  "base64": "$base64"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'AgendarMensagem',

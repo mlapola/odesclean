@@ -115,12 +115,33 @@ bool tobool(String boole) {
   return lowerBoole == 'true';
 }
 
-String? returnnumber(List<String>? numbers) {
-// Verifica se a lista é nula ou vazia
-  if (numbers == null || numbers.isEmpty) {
-    return null; // Retorna nulo se não houver números
+dynamic returnnumber(
+  List<String>? numbers,
+  List<String>? nomes,
+) {
+  // Verifica se as listas são nulas ou vazias
+  if (numbers == null || nomes == null || numbers.isEmpty || nomes.isEmpty) {
+    return null; // Retorna nulo se não houver números ou nomes
   }
 
-  // Une os números em uma única string, separados por ponto e vírgula
-  return numbers.join('; ');
+  // Verifica se as listas têm o mesmo tamanho
+  if (numbers.length != nomes.length) {
+    return null; // Retorna nulo se as listas não tiverem o mesmo tamanho
+  }
+
+  // Cria uma lista de mapas para armazenar os pares Nome e Telefone
+  List<Map<String, String>> pairs = [];
+
+  for (int i = 0; i < numbers.length; i++) {
+    pairs.add({
+      'Nome': nomes[i],
+      'Numero': numbers[i], // Altera 'Telefone' para 'Numero'
+    });
+  }
+
+  // Converte a lista de mapas para uma string JSON
+  String jsonString = jsonEncode(pairs);
+
+  // Retorna a string JSON como uma lista, que pode ser interpretada como JSON
+  return jsonDecode(jsonString); // Retorna a lista decodificada
 }
