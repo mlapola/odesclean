@@ -93,6 +93,7 @@ class _ClientesWidgetState extends State<ClientesWidget> {
                                   children: [
                                     Expanded(
                                       child: Container(
+                                        height: double.infinity,
                                         constraints: const BoxConstraints(
                                           minHeight: 350.0,
                                         ),
@@ -108,59 +109,66 @@ class _ClientesWidgetState extends State<ClientesWidget> {
                                         ),
                                         child: Padding(
                                           padding: const EdgeInsets.all(20.0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    'Clientes da Planilha',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          fontSize: 16.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                  ),
-                                                ],
-                                              ),
-                                              FutureBuilder<ApiCallResponse>(
-                                                future: GoogleSheetsCall.call(),
-                                                builder: (context, snapshot) {
-                                                  // Customize what your widget looks like when it's loading.
-                                                  if (!snapshot.hasData) {
-                                                    return const Shimmer5Widget();
-                                                  }
-                                                  final columnGoogleSheetsResponse =
-                                                      snapshot.data!;
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      'Clientes da Planilha',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                            fontSize: 16.0,
+                                                            letterSpacing: 0.0,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                FutureBuilder<ApiCallResponse>(
+                                                  future:
+                                                      GoogleSheetsCall.call(),
+                                                  builder: (context, snapshot) {
+                                                    // Customize what your widget looks like when it's loading.
+                                                    if (!snapshot.hasData) {
+                                                      return const Shimmer5Widget();
+                                                    }
+                                                    final listViewGoogleSheetsResponse =
+                                                        snapshot.data!;
 
-                                                  return Builder(
-                                                    builder: (context) {
-                                                      final clientes =
-                                                          GoogleSheetsCall
-                                                                  .valores(
-                                                                columnGoogleSheetsResponse
-                                                                    .jsonBody,
-                                                              )?.toList() ??
-                                                              [];
+                                                    return Builder(
+                                                      builder: (context) {
+                                                        final clientes =
+                                                            GoogleSheetsCall
+                                                                    .valores(
+                                                                  listViewGoogleSheetsResponse
+                                                                      .jsonBody,
+                                                                )?.toList() ??
+                                                                [];
 
-                                                      return SingleChildScrollView(
-                                                        child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          children: List.generate(
+                                                        return ListView.builder(
+                                                          padding:
+                                                              EdgeInsets.zero,
+                                                          primary: false,
+                                                          shrinkWrap: true,
+                                                          scrollDirection:
+                                                              Axis.vertical,
+                                                          itemCount:
                                                               clientes.length,
-                                                              (clientesIndex) {
+                                                          itemBuilder: (context,
+                                                              clientesIndex) {
                                                             final clientesItem =
                                                                 clientes[
                                                                     clientesIndex];
@@ -278,15 +286,14 @@ class _ClientesWidgetState extends State<ClientesWidget> {
                                                                 ),
                                                               ),
                                                             );
-                                                          }).divide(const SizedBox(
-                                                              height: 10.0)),
-                                                        ),
-                                                      );
-                                                    },
-                                                  );
-                                                },
-                                              ),
-                                            ].divide(const SizedBox(height: 10.0)),
+                                                          },
+                                                        );
+                                                      },
+                                                    );
+                                                  },
+                                                ),
+                                              ].divide(const SizedBox(height: 10.0)),
+                                            ),
                                           ),
                                         ),
                                       ),

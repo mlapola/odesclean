@@ -878,14 +878,14 @@ class _DisparadorWidgetState extends State<DisparadorWidget> {
                                                       if (!snapshot.hasData) {
                                                         return const Shimmer3Widget();
                                                       }
-                                                      final columnBaseRowResponse =
+                                                      final listViewBaseRowResponse =
                                                           snapshot.data!;
 
                                                       return Builder(
                                                         builder: (context) {
                                                           final agendadas = BaseRowCall
                                                                       .results(
-                                                                columnBaseRowResponse
+                                                                listViewBaseRowResponse
                                                                     .jsonBody,
                                                               )
                                                                   ?.where((e) =>
@@ -897,148 +897,153 @@ class _DisparadorWidgetState extends State<DisparadorWidget> {
                                                                   .toList() ??
                                                               [];
 
-                                                          return SingleChildScrollView(
-                                                            child: Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .min,
-                                                              children: List.generate(
-                                                                  agendadas
-                                                                      .length,
-                                                                  (agendadasIndex) {
-                                                                final agendadasItem =
-                                                                    agendadas[
-                                                                        agendadasIndex];
-                                                                return Expanded(
-                                                                  child:
-                                                                      Container(
-                                                                    width: double
-                                                                        .infinity,
-                                                                    height:
-                                                                        100.0,
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondaryBackground,
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
+                                                          return ListView
+                                                              .builder(
+                                                            padding:
+                                                                EdgeInsets.zero,
+                                                            shrinkWrap: true,
+                                                            scrollDirection:
+                                                                Axis.vertical,
+                                                            itemCount: agendadas
+                                                                .length,
+                                                            itemBuilder: (context,
+                                                                agendadasIndex) {
+                                                              final agendadasItem =
+                                                                  agendadas[
+                                                                      agendadasIndex];
+                                                              return Container(
+                                                                width: double
+                                                                    .infinity,
+                                                                height: 100.0,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryBackground,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
                                                                               20.0),
-                                                                      border:
-                                                                          Border
-                                                                              .all(
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .alternate,
-                                                                      ),
-                                                                    ),
-                                                                    child:
-                                                                        Padding(
-                                                                      padding:
-                                                                          const EdgeInsets.all(
+                                                                  border: Border
+                                                                      .all(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .alternate,
+                                                                  ),
+                                                                ),
+                                                                child: Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .all(
                                                                               10.0),
-                                                                      child:
-                                                                          Row(
+                                                                  child: Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceBetween,
+                                                                    children: [
+                                                                      Column(
                                                                         mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.spaceBetween,
+                                                                            MainAxisSize.min,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
                                                                         children: [
-                                                                          Column(
-                                                                            mainAxisSize:
-                                                                                MainAxisSize.min,
-                                                                            crossAxisAlignment:
-                                                                                CrossAxisAlignment.start,
-                                                                            children: [
-                                                                              Text(
-                                                                                'Programado para',
-                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                      fontFamily: 'Inter',
-                                                                                      fontSize: 16.0,
-                                                                                      letterSpacing: 0.0,
-                                                                                      fontWeight: FontWeight.w600,
-                                                                                    ),
-                                                                              ),
-                                                                              Text(
-                                                                                dateTimeFormat(
-                                                                                    "dd/M/yyyy H:mm",
-                                                                                    functions.todate(valueOrDefault<String>(
-                                                                                      DisparadorStruct.maybeFromMap(agendadasItem)?.date,
-                                                                                      'null',
-                                                                                    ))),
-                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                      fontFamily: 'Inter',
-                                                                                      letterSpacing: 0.0,
-                                                                                    ),
-                                                                              ),
-                                                                            ],
+                                                                          Text(
+                                                                            'Programado para',
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontFamily: 'Inter',
+                                                                                  fontSize: 16.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FontWeight.w600,
+                                                                                ),
                                                                           ),
-                                                                          Flexible(
-                                                                            child:
-                                                                                InkWell(
-                                                                              splashColor: Colors.transparent,
-                                                                              focusColor: Colors.transparent,
-                                                                              hoverColor: Colors.transparent,
-                                                                              highlightColor: Colors.transparent,
-                                                                              onTap: () async {
-                                                                                var confirmDialogResponse = await showDialog<bool>(
-                                                                                      context: context,
-                                                                                      builder: (alertDialogContext) {
-                                                                                        return AlertDialog(
-                                                                                          title: const Text('Tem certeza?'),
-                                                                                          content: const Text('Não é possivel restaurar'),
-                                                                                          actions: [
-                                                                                            TextButton(
-                                                                                              onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                                              child: const Text('Cancelar'),
-                                                                                            ),
-                                                                                            TextButton(
-                                                                                              onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                                              child: const Text('Confirmar'),
-                                                                                            ),
-                                                                                          ],
-                                                                                        );
-                                                                                      },
-                                                                                    ) ??
-                                                                                    false;
-                                                                                if (confirmDialogResponse) {
-                                                                                  _model.apiResultykb = await DeletarAgendamentoCall.call(
-                                                                                    id: DisparadorStruct.maybeFromMap(agendadasItem)?.id.toString(),
-                                                                                  );
-                                                                                }
-                                                                                safeSetState(() => _model.apiRequestCompleter = null);
-                                                                                await _model.waitForApiRequestCompleted();
-
-                                                                                safeSetState(() {});
-                                                                              },
-                                                                              child: Container(
-                                                                                width: 75.0,
-                                                                                height: 30.0,
-                                                                                decoration: BoxDecoration(
-                                                                                  color: FlutterFlowTheme.of(context).error,
-                                                                                  borderRadius: BorderRadius.circular(24.0),
+                                                                          Text(
+                                                                            dateTimeFormat(
+                                                                                "dd/M/yyyy H:mm",
+                                                                                functions.todate(valueOrDefault<String>(
+                                                                                  DisparadorStruct.maybeFromMap(agendadasItem)?.date,
+                                                                                  'null',
+                                                                                ))),
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontFamily: 'Inter',
+                                                                                  letterSpacing: 0.0,
                                                                                 ),
-                                                                                alignment: const AlignmentDirectional(0.0, 0.0),
-                                                                                child: Text(
-                                                                                  'Cancelar',
-                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                        fontFamily: 'Inter',
-                                                                                        color: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                        letterSpacing: 0.0,
-                                                                                        fontWeight: FontWeight.w600,
-                                                                                      ),
-                                                                                ),
-                                                                              ),
-                                                                            ),
                                                                           ),
                                                                         ],
                                                                       ),
-                                                                    ),
+                                                                      Flexible(
+                                                                        child:
+                                                                            InkWell(
+                                                                          splashColor:
+                                                                              Colors.transparent,
+                                                                          focusColor:
+                                                                              Colors.transparent,
+                                                                          hoverColor:
+                                                                              Colors.transparent,
+                                                                          highlightColor:
+                                                                              Colors.transparent,
+                                                                          onTap:
+                                                                              () async {
+                                                                            var confirmDialogResponse = await showDialog<bool>(
+                                                                                  context: context,
+                                                                                  builder: (alertDialogContext) {
+                                                                                    return AlertDialog(
+                                                                                      title: const Text('Tem certeza?'),
+                                                                                      content: const Text('Não é possivel restaurar'),
+                                                                                      actions: [
+                                                                                        TextButton(
+                                                                                          onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                          child: const Text('Cancelar'),
+                                                                                        ),
+                                                                                        TextButton(
+                                                                                          onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                          child: const Text('Confirmar'),
+                                                                                        ),
+                                                                                      ],
+                                                                                    );
+                                                                                  },
+                                                                                ) ??
+                                                                                false;
+                                                                            if (confirmDialogResponse) {
+                                                                              _model.apiResultykb = await DeletarAgendamentoCall.call(
+                                                                                id: DisparadorStruct.maybeFromMap(agendadasItem)?.id.toString(),
+                                                                              );
+                                                                            }
+                                                                            safeSetState(() =>
+                                                                                _model.apiRequestCompleter = null);
+                                                                            await _model.waitForApiRequestCompleted();
+
+                                                                            safeSetState(() {});
+                                                                          },
+                                                                          child:
+                                                                              Container(
+                                                                            width:
+                                                                                48.0,
+                                                                            height:
+                                                                                48.0,
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              color: FlutterFlowTheme.of(context).error,
+                                                                              shape: BoxShape.circle,
+                                                                            ),
+                                                                            alignment:
+                                                                                const AlignmentDirectional(0.0, 0.0),
+                                                                            child:
+                                                                                Icon(
+                                                                              Icons.delete,
+                                                                              color: FlutterFlowTheme.of(context).primary,
+                                                                              size: 24.0,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
                                                                   ),
-                                                                );
-                                                              }).divide(const SizedBox(
-                                                                  height:
-                                                                      10.0)),
-                                                            ),
+                                                                ),
+                                                              );
+                                                            },
                                                           );
                                                         },
                                                       );
