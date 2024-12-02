@@ -423,6 +423,14 @@ class ConfigeditCall {
     String? m1 = '',
     String? m2 = '',
     String? m3 = '',
+    bool? n4,
+    bool? n5,
+    bool? n6,
+    String? m4 = '',
+    String? m5 = '',
+    String? m6 = '',
+    bool? n7,
+    String? m7 = '',
   }) async {
     final ffApiRequestBody = '''
 [
@@ -440,6 +448,26 @@ class ConfigeditCall {
     "id": "4",
     "active": $n3,
     "value": "$m3"
+  },
+  {
+    "id": "5",
+    "active": $n4,
+    "value": "$m4"
+  },
+  {
+    "id": "6",
+    "active": $n5,
+    "value": "$m5"
+  },
+  {
+    "id": "7",
+    "active": $n6,
+    "value": "$m6"
+  },
+  {
+    "id": "8",
+    "active": $n7,
+    "value": "$m7"
   }
 ]''';
     return ApiManager.instance.makeApiCall(

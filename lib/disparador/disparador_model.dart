@@ -49,6 +49,30 @@ class DisparadorModel extends FlutterFlowModel<DisparadorWidget> {
   FocusNode? textFieldFocusNode3;
   TextEditingController? textController4;
   String? Function(BuildContext, String?)? textController4Validator;
+  // State field(s) for Switch widget.
+  bool? switchValue4;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode4;
+  TextEditingController? textController5;
+  String? Function(BuildContext, String?)? textController5Validator;
+  // State field(s) for Switch widget.
+  bool? switchValue5;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode5;
+  TextEditingController? textController6;
+  String? Function(BuildContext, String?)? textController6Validator;
+  // State field(s) for Switch widget.
+  bool? switchValue6;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode6;
+  TextEditingController? textController7;
+  String? Function(BuildContext, String?)? textController7Validator;
+  // State field(s) for Switch widget.
+  bool? switchValue7;
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode7;
+  TextEditingController? textController8;
+  String? Function(BuildContext, String?)? textController8Validator;
   // Stores action output result for [Backend Call - API (configedit)] action in Button widget.
   ApiCallResponse? apiResultrd8;
 
@@ -71,6 +95,18 @@ class DisparadorModel extends FlutterFlowModel<DisparadorWidget> {
 
     textFieldFocusNode3?.dispose();
     textController4?.dispose();
+
+    textFieldFocusNode4?.dispose();
+    textController5?.dispose();
+
+    textFieldFocusNode5?.dispose();
+    textController6?.dispose();
+
+    textFieldFocusNode6?.dispose();
+    textController7?.dispose();
+
+    textFieldFocusNode7?.dispose();
+    textController8?.dispose();
   }
 
   /// Additional helper methods.
