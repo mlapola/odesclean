@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 
 class FFAppState extends ChangeNotifier {
   static FFAppState _instance = FFAppState._internal();
@@ -53,5 +55,34 @@ class FFAppState extends ChangeNotifier {
   int get initial => _initial;
   set initial(int value) {
     _initial = value;
+  }
+
+  List<ProcedimentosStruct> _procedures = [];
+  List<ProcedimentosStruct> get procedures => _procedures;
+  set procedures(List<ProcedimentosStruct> value) {
+    _procedures = value;
+  }
+
+  void addToProcedures(ProcedimentosStruct value) {
+    procedures.add(value);
+  }
+
+  void removeFromProcedures(ProcedimentosStruct value) {
+    procedures.remove(value);
+  }
+
+  void removeAtIndexFromProcedures(int index) {
+    procedures.removeAt(index);
+  }
+
+  void updateProceduresAtIndex(
+    int index,
+    ProcedimentosStruct Function(ProcedimentosStruct) updateFn,
+  ) {
+    procedures[index] = updateFn(_procedures[index]);
+  }
+
+  void insertAtIndexInProcedures(int index, ProcedimentosStruct value) {
+    procedures.insert(index, value);
   }
 }

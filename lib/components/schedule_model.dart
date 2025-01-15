@@ -1,4 +1,3 @@
-import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'schedule_widget.dart' show ScheduleWidget;
 import 'package:flutter/material.dart';
@@ -69,11 +68,6 @@ class ScheduleModel extends FlutterFlowModel<ScheduleWidget> {
 
     return null;
   }
-
-  // Stores action output result for [Backend Call - API (GoogleSheets)] action in Button widget.
-  ApiCallResponse? contatos;
-  // Stores action output result for [Backend Call - API (AgendarMensagem)] action in Button widget.
-  ApiCallResponse? apiResultch5;
 
   @override
   void initState(BuildContext context) {

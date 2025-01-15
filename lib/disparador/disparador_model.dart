@@ -2,7 +2,6 @@ import '/backend/api_requests/api_calls.dart';
 import '/components/drawer_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'dart:async';
 import 'disparador_widget.dart' show DisparadorWidget;
 import 'package:flutter/material.dart';
 import 'package:record/record.dart';
@@ -28,53 +27,6 @@ class DisparadorModel extends FlutterFlowModel<DisparadorWidget> {
   String? Function(BuildContext, String?)? textFieldbbTextControllerValidator;
   // Stores action output result for [Backend Call - API (Disparar)] action in Button widget.
   ApiCallResponse? apiResultdh9;
-  Completer<ApiCallResponse>? apiRequestCompleter;
-  // Stores action output result for [Backend Call - API (DeletarAgendamento)] action in Container widget.
-  ApiCallResponse? apiResultykb;
-  // State field(s) for Switch widget.
-  bool? switchValue1;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode1;
-  TextEditingController? textController2;
-  String? Function(BuildContext, String?)? textController2Validator;
-  // State field(s) for Switch widget.
-  bool? switchValue2;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode2;
-  TextEditingController? textController3;
-  String? Function(BuildContext, String?)? textController3Validator;
-  // State field(s) for Switch widget.
-  bool? switchValue3;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode3;
-  TextEditingController? textController4;
-  String? Function(BuildContext, String?)? textController4Validator;
-  // State field(s) for Switch widget.
-  bool? switchValue4;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode4;
-  TextEditingController? textController5;
-  String? Function(BuildContext, String?)? textController5Validator;
-  // State field(s) for Switch widget.
-  bool? switchValue5;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode5;
-  TextEditingController? textController6;
-  String? Function(BuildContext, String?)? textController6Validator;
-  // State field(s) for Switch widget.
-  bool? switchValue6;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode6;
-  TextEditingController? textController7;
-  String? Function(BuildContext, String?)? textController7Validator;
-  // State field(s) for Switch widget.
-  bool? switchValue7;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode7;
-  TextEditingController? textController8;
-  String? Function(BuildContext, String?)? textController8Validator;
-  // Stores action output result for [Backend Call - API (configedit)] action in Button widget.
-  ApiCallResponse? apiResultrd8;
 
   @override
   void initState(BuildContext context) {
@@ -86,42 +38,5 @@ class DisparadorModel extends FlutterFlowModel<DisparadorWidget> {
     drawerModel.dispose();
     textFieldbbFocusNode?.dispose();
     textFieldbbTextController?.dispose();
-
-    textFieldFocusNode1?.dispose();
-    textController2?.dispose();
-
-    textFieldFocusNode2?.dispose();
-    textController3?.dispose();
-
-    textFieldFocusNode3?.dispose();
-    textController4?.dispose();
-
-    textFieldFocusNode4?.dispose();
-    textController5?.dispose();
-
-    textFieldFocusNode5?.dispose();
-    textController6?.dispose();
-
-    textFieldFocusNode6?.dispose();
-    textController7?.dispose();
-
-    textFieldFocusNode7?.dispose();
-    textController8?.dispose();
-  }
-
-  /// Additional helper methods.
-  Future waitForApiRequestCompleted({
-    double minWait = 0,
-    double maxWait = double.infinity,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-    while (true) {
-      await Future.delayed(const Duration(milliseconds: 50));
-      final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = apiRequestCompleter?.isCompleted ?? false;
-      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
-        break;
-      }
-    }
   }
 }

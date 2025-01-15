@@ -1,4 +1,4 @@
-import '/backend/api_requests/api_calls.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -450,29 +450,19 @@ class _ScheduleWidgetState extends State<ScheduleWidget> {
                         !_model.formKey.currentState!.validate()) {
                       return;
                     }
-                    _model.contatos = await GoogleSheetsCall.call();
 
-                    _model.apiResultch5 = await AgendarMensagemCall.call(
-                      message: _model.textController3.text,
-                      date: functions.formatdate(_model.textController1.text,
-                          _model.textController2.text),
-                      contactJson: functions.returnnumber(
-                          GoogleSheetsCall.numeros(
-                            (_model.contatos?.jsonBody ?? ''),
-                          )?.toList(),
-                          GoogleSheetsCall.nomes(
-                            (_model.contatos?.jsonBody ?? ''),
-                          )?.toList()),
-                      type: _model.type == 1 ? 'text' : 'img',
-                      base64: _model.uploadedImageBase64,
-                    );
-
-                    if ((_model.apiResultch5?.succeeded ?? true)) {
-                      Navigator.pop(context);
-                      await widget.refresh?.call();
-                    }
-
-                    safeSetState(() {});
+                    await ScheduleCampainRecord.collection
+                        .doc()
+                        .set(createScheduleCampainRecordData(
+                          message: _model.textController3.text,
+                          date: functions.formatdate(
+                              _model.textController1.text,
+                              _model.textController2.text),
+                          type: _model.type == 1 ? 'text' : 'img',
+                          base64: _model.uploadedImageBase64,
+                          sended: false,
+                        ));
+                    Navigator.pop(context);
                   },
                   text: 'Agendar',
                   options: FFButtonOptions(

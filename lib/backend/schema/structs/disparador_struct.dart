@@ -1,11 +1,12 @@
 // ignore_for_file: unnecessary_getters_setters
 
-import '/backend/schema/util/schema_util.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'index.dart';
+import '/backend/schema/util/firestore_util.dart';
+
 import '/flutter_flow/flutter_flow_util.dart';
 
-class DisparadorStruct extends BaseStruct {
+class DisparadorStruct extends FFFirebaseStruct {
   DisparadorStruct({
     int? id,
     String? order,
@@ -13,12 +14,14 @@ class DisparadorStruct extends BaseStruct {
     String? date,
     bool? send,
     String? message,
+    FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _id = id,
         _order = order,
         _name = name,
         _date = date,
         _send = send,
-        _message = message;
+        _message = message,
+        super(firestoreUtilData);
 
   // "id" field.
   int? _id;
@@ -175,6 +178,10 @@ DisparadorStruct createDisparadorStruct({
   String? date,
   bool? send,
   String? message,
+  Map<String, dynamic> fieldValues = const {},
+  bool clearUnsetFields = true,
+  bool create = false,
+  bool delete = false,
 }) =>
     DisparadorStruct(
       id: id,
@@ -183,4 +190,69 @@ DisparadorStruct createDisparadorStruct({
       date: date,
       send: send,
       message: message,
+      firestoreUtilData: FirestoreUtilData(
+        clearUnsetFields: clearUnsetFields,
+        create: create,
+        delete: delete,
+        fieldValues: fieldValues,
+      ),
     );
+
+DisparadorStruct? updateDisparadorStruct(
+  DisparadorStruct? disparador, {
+  bool clearUnsetFields = true,
+  bool create = false,
+}) =>
+    disparador
+      ?..firestoreUtilData = FirestoreUtilData(
+        clearUnsetFields: clearUnsetFields,
+        create: create,
+      );
+
+void addDisparadorStructData(
+  Map<String, dynamic> firestoreData,
+  DisparadorStruct? disparador,
+  String fieldName, [
+  bool forFieldValue = false,
+]) {
+  firestoreData.remove(fieldName);
+  if (disparador == null) {
+    return;
+  }
+  if (disparador.firestoreUtilData.delete) {
+    firestoreData[fieldName] = FieldValue.delete();
+    return;
+  }
+  final clearFields =
+      !forFieldValue && disparador.firestoreUtilData.clearUnsetFields;
+  if (clearFields) {
+    firestoreData[fieldName] = <String, dynamic>{};
+  }
+  final disparadorData = getDisparadorFirestoreData(disparador, forFieldValue);
+  final nestedData = disparadorData.map((k, v) => MapEntry('$fieldName.$k', v));
+
+  final mergeFields = disparador.firestoreUtilData.create || clearFields;
+  firestoreData
+      .addAll(mergeFields ? mergeNestedFields(nestedData) : nestedData);
+}
+
+Map<String, dynamic> getDisparadorFirestoreData(
+  DisparadorStruct? disparador, [
+  bool forFieldValue = false,
+]) {
+  if (disparador == null) {
+    return {};
+  }
+  final firestoreData = mapToFirestore(disparador.toMap());
+
+  // Add any Firestore field values
+  disparador.firestoreUtilData.fieldValues
+      .forEach((k, v) => firestoreData[k] = v);
+
+  return forFieldValue ? mergeNestedFields(firestoreData) : firestoreData;
+}
+
+List<Map<String, dynamic>> getDisparadorListFirestoreData(
+  List<DisparadorStruct>? disparadors,
+) =>
+    disparadors?.map((e) => getDisparadorFirestoreData(e, true)).toList() ?? [];

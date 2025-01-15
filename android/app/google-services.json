@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "745911923903",
+    "project_id": "odesclean-database",
+    "storage_bucket": "odesclean-database.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:745911923903:android:25e902de2fa2ab16b3020a",
+        "android_client_info": {
+          "package_name": "com.odesclean"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-LIB_L4fW6_-Hu1c0p0_d10oYgCFs_5k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
