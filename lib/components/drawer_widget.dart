@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -578,39 +579,52 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                             safeSetState(
                                 () => _model.mouseRegionHovered7 = false);
                           }),
-                          child: Container(
-                            width: 199.0,
-                            height: 32.0,
-                            decoration: BoxDecoration(
-                              color: _model.mouseRegionHovered7
-                                  ? const Color(0x79E5E7EB)
-                                  : const Color(0x00000000),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  8.0, 6.0, 8.0, 6.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  const Icon(
-                                    Icons.exit_to_app,
-                                    color: Color(0xFF384252),
-                                    size: 12.0,
-                                  ),
-                                  Text(
-                                    'Sair',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Inter',
-                                          color: const Color(0xFF384252),
-                                          fontSize: 14.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                  ),
-                                ].divide(const SizedBox(width: 10.0)),
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              GoRouter.of(context).prepareAuthEvent();
+                              await authManager.signOut();
+                              GoRouter.of(context).clearRedirectLocation();
+
+                              context.goNamedAuth('Login', context.mounted);
+                            },
+                            child: Container(
+                              width: 199.0,
+                              height: 32.0,
+                              decoration: BoxDecoration(
+                                color: _model.mouseRegionHovered7
+                                    ? const Color(0x79E5E7EB)
+                                    : const Color(0x00000000),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    8.0, 6.0, 8.0, 6.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    const Icon(
+                                      Icons.exit_to_app,
+                                      color: Color(0xFF384252),
+                                      size: 12.0,
+                                    ),
+                                    Text(
+                                      'Sair',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            color: const Color(0xFF384252),
+                                            fontSize: 14.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                    ),
+                                  ].divide(const SizedBox(width: 10.0)),
+                                ),
                               ),
                             ),
                           ),

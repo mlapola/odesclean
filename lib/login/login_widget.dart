@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -297,7 +298,18 @@ class _LoginWidgetState extends State<LoginWidget>
                           ),
                           FFButtonWidget(
                             onPressed: () async {
-                              context.pushNamed('Instance');
+                              GoRouter.of(context).prepareAuthEvent();
+
+                              final user = await authManager.signInWithEmail(
+                                context,
+                                _model.mailTextController.text,
+                                _model.passTextController.text,
+                              );
+                              if (user == null) {
+                                return;
+                              }
+
+                              context.goNamedAuth('Instance', context.mounted);
                             },
                             text: 'Entrar',
                             options: FFButtonOptions(
