@@ -14,11 +14,9 @@ class Addprocedure3Widget extends StatefulWidget {
   const Addprocedure3Widget({
     super.key,
     required this.customer,
-    required this.close,
   });
 
   final DocumentReference? customer;
-  final Future Function()? close;
 
   @override
   State<Addprocedure3Widget> createState() => _Addprocedure3WidgetState();
@@ -410,7 +408,6 @@ class _Addprocedure3WidgetState extends State<Addprocedure3Widget> {
                       ),
                     });
                     Navigator.pop(context);
-                    await widget.close?.call();
                   },
                   text: 'Adicionar',
                   options: FFButtonOptions(

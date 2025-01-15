@@ -478,7 +478,7 @@ class _ClientesWidgetState extends State<ClientesWidget> {
                                                                                 MediaQuery.viewInsetsOf(context),
                                                                             child:
                                                                                 CustomerInfoWidget(
-                                                                              customer: searchItem,
+                                                                              customer: searchItem.reference,
                                                                             ),
                                                                           ),
                                                                         );
@@ -638,7 +638,7 @@ class _ClientesWidgetState extends State<ClientesWidget> {
                                                                                 MediaQuery.viewInsetsOf(context),
                                                                             child:
                                                                                 CustomerInfoWidget(
-                                                                              customer: listViewCustomersRecord,
+                                                                              customer: listViewCustomersRecord.reference,
                                                                             ),
                                                                           ),
                                                                         );
