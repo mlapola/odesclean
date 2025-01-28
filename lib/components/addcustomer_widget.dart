@@ -1,6 +1,8 @@
 import '/backend/backend.dart';
-import '/components/addprocedure2_widget.dart';
+import '/components/addprocedure1_widget.dart';
 import '/components/addprocedure_widget.dart';
+import '/components/approve_widget.dart';
+import '/components/viewprocedure1_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -66,51 +68,56 @@ class _AddcustomerWidgetState extends State<AddcustomerWidget> {
           borderRadius: BorderRadius.circular(18.0),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Flexible(
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Adicionar cliente',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Inter',
-                            fontSize: 16.0,
-                            letterSpacing: 0.0,
-                            fontWeight: FontWeight.w500,
-                          ),
-                    ),
-                    InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        Navigator.pop(context);
-                      },
-                      child: FaIcon(
-                        FontAwesomeIcons.times,
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        size: 24.0,
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Adicionar cliente',
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Inter',
+                              fontSize: 16.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w500,
+                            ),
                       ),
-                    ),
-                  ],
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          Navigator.pop(context);
+                        },
+                        child: FaIcon(
+                          FontAwesomeIcons.times,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          size: 24.0,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Form(
-                      key: _model.formKey,
-                      autovalidateMode: AutovalidateMode.disabled,
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Form(
+                    key: _model.formKey,
+                    autovalidateMode: AutovalidateMode.disabled,
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -502,11 +509,18 @@ class _AddcustomerWidgetState extends State<AddcustomerWidget> {
                         ],
                       ),
                     ),
-                    Divider(
-                      thickness: 2.0,
-                      color: FlutterFlowTheme.of(context).alternate,
-                    ),
-                    Row(
+                  ),
+                  Divider(
+                    height: 0.0,
+                    thickness: 0.0,
+                    indent: 16.0,
+                    endIndent: 16.0,
+                    color: FlutterFlowTheme.of(context).alternate,
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -538,7 +552,7 @@ class _AddcustomerWidgetState extends State<AddcustomerWidget> {
                               builder: (context) {
                                 return Padding(
                                   padding: MediaQuery.viewInsetsOf(context),
-                                  child: const Addprocedure2Widget(),
+                                  child: const Addprocedure1Widget(),
                                 );
                               },
                             ).then((value) => safeSetState(() {}));
@@ -546,27 +560,40 @@ class _AddcustomerWidgetState extends State<AddcustomerWidget> {
                         ),
                       ],
                     ),
-                    Expanded(
-                      child: Builder(
-                        builder: (context) {
-                          final procedures = FFAppState().procedures.toList();
+                  ),
+                  Builder(
+                    builder: (context) {
+                      final procedures = FFAppState().procedures.toList();
 
-                          return GridView.builder(
-                            padding: EdgeInsets.zero,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 5,
-                              crossAxisSpacing: 10.0,
-                              mainAxisSpacing: 10.0,
-                              childAspectRatio: 2.5,
-                            ),
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemCount: procedures.length,
-                            itemBuilder: (context, proceduresIndex) {
-                              final proceduresItem =
-                                  procedures[proceduresIndex];
-                              return Container(
+                      return SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: List.generate(procedures.length,
+                                  (proceduresIndex) {
+                            final proceduresItem = procedures[proceduresIndex];
+                            return InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                await showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  enableDrag: false,
+                                  context: context,
+                                  builder: (context) {
+                                    return Padding(
+                                      padding: MediaQuery.viewInsetsOf(context),
+                                      child: Viewprocedure1Widget(
+                                        procedure: proceduresItem,
+                                      ),
+                                    );
+                                  },
+                                ).then((value) => safeSetState(() {}));
+                              },
+                              child: Container(
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context).primary,
                                   borderRadius: BorderRadius.circular(8.0),
@@ -584,58 +611,78 @@ class _AddcustomerWidgetState extends State<AddcustomerWidget> {
                                         ),
                                   ),
                                 ),
-                              );
-                            },
-                          );
-                        },
-                      ),
-                    ),
-                  ].divide(const SizedBox(height: 10.0)),
-                ),
+                              ),
+                            );
+                          })
+                              .divide(const SizedBox(width: 10.0))
+                              .addToStart(const SizedBox(width: 16.0))
+                              .addToEnd(const SizedBox(width: 16.0)),
+                        ),
+                      );
+                    },
+                  ),
+                ].divide(const SizedBox(height: 10.0)),
               ),
               Flexible(
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    if (_model.formKey.currentState == null ||
-                        !_model.formKey.currentState!.validate()) {
-                      return;
-                    }
+                child: Padding(
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      if (_model.formKey.currentState == null ||
+                          !_model.formKey.currentState!.validate()) {
+                        return;
+                      }
 
-                    await CustomersRecord.collection.doc().set({
-                      ...createCustomersRecordData(
-                        name: _model.textController1.text,
-                        phone: _model.textController2.text,
-                        birthday: _model.textController3.text,
-                      ),
-                      ...mapToFirestore(
-                        {
-                          'interests': _model.dropDownValue,
-                          'procedures': getProcedimentosListFirestoreData(
-                            FFAppState().procedures,
-                          ),
-                        },
-                      ),
-                    });
-                    FFAppState().procedures = [];
-                    safeSetState(() {});
-                    Navigator.pop(context);
-                  },
-                  text: 'Adicionar Cliente',
-                  options: FFButtonOptions(
-                    width: double.infinity,
-                    height: 40.0,
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                    iconPadding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primaryText,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily: 'Inter Tight',
-                          color: Colors.white,
-                          letterSpacing: 0.0,
+                      await CustomersRecord.collection.doc().set({
+                        ...createCustomersRecordData(
+                          name: _model.textController1.text,
+                          phone: _model.textController2.text,
+                          birthday: _model.textController3.text,
                         ),
-                    elevation: 0.0,
-                    borderRadius: BorderRadius.circular(16.0),
+                        ...mapToFirestore(
+                          {
+                            'interests': _model.dropDownValue,
+                            'procedures': getProcedimentosListFirestoreData(
+                              FFAppState().procedures,
+                            ),
+                          },
+                        ),
+                      });
+                      FFAppState().procedures = [];
+                      safeSetState(() {});
+                      Navigator.pop(context);
+                      await showModalBottomSheet(
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        enableDrag: false,
+                        context: context,
+                        builder: (context) {
+                          return Padding(
+                            padding: MediaQuery.viewInsetsOf(context),
+                            child: const ApproveWidget(),
+                          );
+                        },
+                      ).then((value) => safeSetState(() {}));
+                    },
+                    text: 'Adicionar Cliente',
+                    options: FFButtonOptions(
+                      width: double.infinity,
+                      height: 40.0,
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                      iconPadding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).primaryText,
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                fontFamily: 'Inter Tight',
+                                color: Colors.white,
+                                letterSpacing: 0.0,
+                              ),
+                      elevation: 0.0,
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
                   ),
                 ),
               ),

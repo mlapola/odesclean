@@ -1,5 +1,4 @@
 import '/backend/backend.dart';
-import '/components/addprocedure_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -7,18 +6,25 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'addprocedure2_model.dart';
-export 'addprocedure2_model.dart';
+import 'viewprocedure_model.dart';
+export 'viewprocedure_model.dart';
 
-class Addprocedure2Widget extends StatefulWidget {
-  const Addprocedure2Widget({super.key});
+class ViewprocedureWidget extends StatefulWidget {
+  const ViewprocedureWidget({
+    super.key,
+    required this.procedure,
+    required this.customer,
+  });
+
+  final ProcedimentosStruct? procedure;
+  final DocumentReference? customer;
 
   @override
-  State<Addprocedure2Widget> createState() => _Addprocedure2WidgetState();
+  State<ViewprocedureWidget> createState() => _ViewprocedureWidgetState();
 }
 
-class _Addprocedure2WidgetState extends State<Addprocedure2Widget> {
-  late Addprocedure2Model _model;
+class _ViewprocedureWidgetState extends State<ViewprocedureWidget> {
+  late ViewprocedureModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -29,12 +35,14 @@ class _Addprocedure2WidgetState extends State<Addprocedure2Widget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => Addprocedure2Model());
+    _model = createModel(context, () => ViewprocedureModel());
 
-    _model.textController1 ??= TextEditingController();
+    _model.textController1 ??=
+        TextEditingController(text: widget.procedure?.initial);
     _model.textFieldFocusNode1 ??= FocusNode();
 
-    _model.textController2 ??= TextEditingController();
+    _model.textController2 ??=
+        TextEditingController(text: widget.procedure?.notice);
     _model.textFieldFocusNode2 ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -70,7 +78,7 @@ class _Addprocedure2WidgetState extends State<Addprocedure2Widget> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Adicionar procedimento',
+                      'Editar procedimento',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Inter',
                             fontSize: 16.0,
@@ -134,7 +142,10 @@ class _Addprocedure2WidgetState extends State<Addprocedure2Widget> {
 
                                 return FlutterFlowDropDown<String>(
                                   controller: _model.dropDownValueController ??=
-                                      FormFieldController<String>(null),
+                                      FormFieldController<String>(
+                                    _model.dropDownValue ??=
+                                        widget.procedure?.name,
+                                  ),
                                   options: dropDownProceduresRecordList
                                       .map((e) => e.name)
                                       .toList(),
@@ -181,6 +192,7 @@ class _Addprocedure2WidgetState extends State<Addprocedure2Widget> {
                                   margin: const EdgeInsetsDirectional.fromSTEB(
                                       12.0, 0.0, 12.0, 0.0),
                                   hidesUnderline: true,
+                                  disabled: true,
                                   isOverButton: false,
                                   isSearchable: true,
                                   isMultiSelect: false,
@@ -195,6 +207,7 @@ class _Addprocedure2WidgetState extends State<Addprocedure2Widget> {
                                   controller: _model.textController1,
                                   focusNode: _model.textFieldFocusNode1,
                                   autofocus: false,
+                                  readOnly: true,
                                   obscureText: false,
                                   decoration: InputDecoration(
                                     isDense: true,
@@ -265,6 +278,7 @@ class _Addprocedure2WidgetState extends State<Addprocedure2Widget> {
                                   controller: _model.textController2,
                                   focusNode: _model.textFieldFocusNode2,
                                   autofocus: false,
+                                  readOnly: true,
                                   obscureText: false,
                                   decoration: InputDecoration(
                                     isDense: true,
@@ -334,38 +348,6 @@ class _Addprocedure2WidgetState extends State<Addprocedure2Widget> {
                                 ),
                               ].divide(const SizedBox(height: 20.0)),
                             ),
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                await showModalBottomSheet(
-                                  isScrollControlled: true,
-                                  backgroundColor: Colors.transparent,
-                                  enableDrag: false,
-                                  context: context,
-                                  builder: (context) {
-                                    return Padding(
-                                      padding: MediaQuery.viewInsetsOf(context),
-                                      child: const AddprocedureWidget(),
-                                    );
-                                  },
-                                ).then((value) => safeSetState(() {}));
-                              },
-                              child: Text(
-                                'Adicionar procedimento',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      color: const Color(0xFFB6B6B6),
-                                      fontSize: 10.0,
-                                      letterSpacing: 0.0,
-                                      decoration: TextDecoration.underline,
-                                    ),
-                              ),
-                            ),
                           ].divide(const SizedBox(height: 20.0)),
                         ),
                       ),
@@ -376,22 +358,24 @@ class _Addprocedure2WidgetState extends State<Addprocedure2Widget> {
               Flexible(
                 child: FFButtonWidget(
                   onPressed: () async {
-                    if (_model.formKey.currentState == null ||
-                        !_model.formKey.currentState!.validate()) {
-                      return;
-                    }
-                    if (_model.dropDownValue == null) {
-                      return;
-                    }
-                    FFAppState().addToProcedures(ProcedimentosStruct(
-                      name: _model.dropDownValue,
-                      initial: _model.textController1.text,
-                      notice: _model.textController2.text,
-                    ));
-                    safeSetState(() {});
+                    await widget.customer!.update({
+                      ...mapToFirestore(
+                        {
+                          'procedures': FieldValue.arrayRemove([
+                            getProcedimentosFirestoreData(
+                              updateProcedimentosStruct(
+                                widget.procedure,
+                                clearUnsetFields: false,
+                              ),
+                              true,
+                            )
+                          ]),
+                        },
+                      ),
+                    });
                     Navigator.pop(context);
                   },
-                  text: 'Adicionar',
+                  text: 'Excluir',
                   options: FFButtonOptions(
                     width: double.infinity,
                     height: 40.0,
@@ -399,7 +383,7 @@ class _Addprocedure2WidgetState extends State<Addprocedure2Widget> {
                         const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                     iconPadding:
                         const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primaryText,
+                    color: FlutterFlowTheme.of(context).error,
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Inter Tight',
                           color: Colors.white,

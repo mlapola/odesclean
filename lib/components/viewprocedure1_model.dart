@@ -1,32 +1,43 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'customer_info_widget.dart' show CustomerInfoWidget;
+import 'viewprocedure1_widget.dart' show Viewprocedure1Widget;
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-class CustomerInfoModel extends FlutterFlowModel<CustomerInfoWidget> {
+class Viewprocedure1Model extends FlutterFlowModel<Viewprocedure1Widget> {
   ///  State fields for stateful widgets in this component.
 
+  final formKey = GlobalKey<FormState>();
+  // State field(s) for DropDown widget.
+  String? dropDownValue;
+  FormFieldController<String>? dropDownValueController;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;
   TextEditingController? textController1;
+  final textFieldMask1 = MaskTextInputFormatter(mask: '##/##/####');
   String? Function(BuildContext, String?)? textController1Validator;
-  // State field(s) for DropDown widget.
-  List<String>? dropDownValue;
-  FormFieldController<List<String>>? dropDownValueController;
+  String? _textController1Validator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Início do procedimento necessário';
+    }
+
+    if (val.length < 10) {
+      return 'Requires at least 10 characters.';
+    }
+
+    return null;
+  }
+
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode2;
   TextEditingController? textController2;
-  final textFieldMask2 = MaskTextInputFormatter(mask: '(##) # ####-####');
+  final textFieldMask2 = MaskTextInputFormatter(mask: '##/##/####');
   String? Function(BuildContext, String?)? textController2Validator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode3;
-  TextEditingController? textController3;
-  final textFieldMask3 = MaskTextInputFormatter(mask: '##/##');
-  String? Function(BuildContext, String?)? textController3Validator;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    textController1Validator = _textController1Validator;
+  }
 
   @override
   void dispose() {
@@ -35,8 +46,5 @@ class CustomerInfoModel extends FlutterFlowModel<CustomerInfoWidget> {
 
     textFieldFocusNode2?.dispose();
     textController2?.dispose();
-
-    textFieldFocusNode3?.dispose();
-    textController3?.dispose();
   }
 }

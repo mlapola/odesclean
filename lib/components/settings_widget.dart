@@ -1,4 +1,5 @@
 import '/backend/backend.dart';
+import '/components/approve_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -108,6 +109,18 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                       await widget.ref!.update(createSettingsRecordData(
                         status: true,
                       ));
+                      await showModalBottomSheet(
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        enableDrag: false,
+                        context: context,
+                        builder: (context) {
+                          return Padding(
+                            padding: MediaQuery.viewInsetsOf(context),
+                            child: const ApproveWidget(),
+                          );
+                        },
+                      ).then((value) => safeSetState(() {}));
                     } else {
                       await widget.ref!.update(createSettingsRecordData(
                         status: false,

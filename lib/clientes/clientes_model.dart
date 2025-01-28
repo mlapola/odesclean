@@ -10,10 +10,15 @@ class ClientesModel extends FlutterFlowModel<ClientesWidget> {
   // Model for Drawer component.
   late DrawerModel drawerModel;
   // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode;
-  TextEditingController? textController;
-  String? Function(BuildContext, String?)? textControllerValidator;
-  List<CustomersRecord> simpleSearchResults = [];
+  FocusNode? textFieldFocusNode1;
+  TextEditingController? textController1;
+  String? Function(BuildContext, String?)? textController1Validator;
+  List<CustomersRecord> simpleSearchResults1 = [];
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode2;
+  TextEditingController? textController2;
+  String? Function(BuildContext, String?)? textController2Validator;
+  List<ProceduresRecord> simpleSearchResults2 = [];
 
   @override
   void initState(BuildContext context) {
@@ -23,7 +28,10 @@ class ClientesModel extends FlutterFlowModel<ClientesWidget> {
   @override
   void dispose() {
     drawerModel.dispose();
-    textFieldFocusNode?.dispose();
-    textController?.dispose();
+    textFieldFocusNode1?.dispose();
+    textController1?.dispose();
+
+    textFieldFocusNode2?.dispose();
+    textController2?.dispose();
   }
 }

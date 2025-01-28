@@ -1,4 +1,5 @@
 import '/backend/backend.dart';
+import '/components/approve_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -463,6 +464,18 @@ class _ScheduleWidgetState extends State<ScheduleWidget> {
                           sended: false,
                         ));
                     Navigator.pop(context);
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      enableDrag: false,
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: MediaQuery.viewInsetsOf(context),
+                          child: const ApproveWidget(),
+                        );
+                      },
+                    ).then((value) => safeSetState(() {}));
                   },
                   text: 'Agendar',
                   options: FFButtonOptions(

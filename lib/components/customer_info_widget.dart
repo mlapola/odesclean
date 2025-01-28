@@ -1,9 +1,13 @@
 import '/backend/backend.dart';
 import '/components/addprocedure3_widget.dart';
+import '/components/approve_widget.dart';
+import '/components/viewprocedure_widget.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'customer_info_model.dart';
@@ -76,7 +80,7 @@ class _CustomerInfoWidgetState extends State<CustomerInfoWidget> {
           final containerCustomersRecord = snapshot.data!;
 
           return Container(
-            width: 450.0,
+            width: 500.0,
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).secondaryBackground,
               borderRadius: BorderRadius.circular(18.0),
@@ -138,82 +142,213 @@ class _CustomerInfoWidgetState extends State<CustomerInfoWidget> {
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  TextFormField(
-                                    controller: _model.textController1 ??=
-                                        TextEditingController(
-                                      text: containerCustomersRecord.name,
-                                    ),
-                                    focusNode: _model.textFieldFocusNode1,
-                                    autofocus: false,
-                                    textCapitalization:
-                                        TextCapitalization.words,
-                                    readOnly: true,
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      isDense: true,
-                                      labelText: 'Nome',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            letterSpacing: 0.0,
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: TextFormField(
+                                          controller: _model.textController1 ??=
+                                              TextEditingController(
+                                            text: containerCustomersRecord.name,
                                           ),
-                                      hintText: 'Nome do cliente',
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            letterSpacing: 0.0,
+                                          focusNode: _model.textFieldFocusNode1,
+                                          autofocus: false,
+                                          textCapitalization:
+                                              TextCapitalization.words,
+                                          obscureText: false,
+                                          decoration: InputDecoration(
+                                            isDense: true,
+                                            labelText: 'Nome',
+                                            labelStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium
+                                                    .override(
+                                                      fontFamily: 'Inter',
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                            hintText: 'Nome do cliente',
+                                            hintStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium
+                                                    .override(
+                                                      fontFamily: 'Inter',
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .alternate,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: const BorderSide(
+                                                color: Color(0x00000000),
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            errorBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                                width: 1.0,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            filled: true,
+                                            fillColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondaryBackground,
                                           ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .alternate,
-                                          width: 1.0,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                letterSpacing: 0.0,
+                                              ),
+                                          cursorColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          validator: _model
+                                              .textController1Validator
+                                              .asValidator(context),
                                         ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
                                       ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1.0,
+                                      Expanded(
+                                        child: StreamBuilder<
+                                            List<ProceduresRecord>>(
+                                          stream: queryProceduresRecord(
+                                            queryBuilder: (proceduresRecord) =>
+                                                proceduresRecord
+                                                    .orderBy('name'),
+                                          ),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    valueColor:
+                                                        AlwaysStoppedAnimation<
+                                                            Color>(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primary,
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            List<ProceduresRecord>
+                                                dropDownProceduresRecordList =
+                                                snapshot.data!;
+
+                                            return FlutterFlowDropDown<String>(
+                                              multiSelectController: _model
+                                                      .dropDownValueController ??=
+                                                  FormListFieldController<
+                                                          String>(
+                                                      _model.dropDownValue ??=
+                                                          List<String>.from(
+                                                containerCustomersRecord
+                                                        .interests ??
+                                                    [],
+                                              )),
+                                              options:
+                                                  dropDownProceduresRecordList
+                                                      .map((e) => e.name)
+                                                      .toList(),
+                                              height: 40.0,
+                                              searchHintTextStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                              searchTextStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                              hintText: 'Interesses',
+                                              searchHintText: 'Procurar...',
+                                              icon: Icon(
+                                                Icons
+                                                    .keyboard_arrow_down_rounded,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                size: 24.0,
+                                              ),
+                                              fillColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              elevation: 2.0,
+                                              borderColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                              borderWidth: 1.0,
+                                              borderRadius: 8.0,
+                                              margin: const EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      12.0, 0.0, 12.0, 0.0),
+                                              hidesUnderline: true,
+                                              isOverButton: true,
+                                              isSearchable: true,
+                                              isMultiSelect: true,
+                                              onMultiSelectChanged:
+                                                  (val) async {
+                                                safeSetState(() =>
+                                                    _model.dropDownValue = val);
+                                                await widget.customer!.update({
+                                                  ...mapToFirestore(
+                                                    {
+                                                      'interests':
+                                                          _model.dropDownValue,
+                                                    },
+                                                  ),
+                                                });
+                                              },
+                                            );
+                                          },
                                         ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
                                       ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .error,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .error,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                      filled: true,
-                                      fillColor: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Inter',
-                                          letterSpacing: 0.0,
-                                        ),
-                                    cursorColor: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    validator: _model.textController1Validator
-                                        .asValidator(context),
+                                    ].divide(const SizedBox(width: 10.0)),
                                   ),
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -227,7 +362,6 @@ class _CustomerInfoWidgetState extends State<CustomerInfoWidget> {
                                           ),
                                           focusNode: _model.textFieldFocusNode2,
                                           autofocus: false,
-                                          readOnly: true,
                                           obscureText: false,
                                           decoration: InputDecoration(
                                             isDense: true,
@@ -318,7 +452,6 @@ class _CustomerInfoWidgetState extends State<CustomerInfoWidget> {
                                           ),
                                           focusNode: _model.textFieldFocusNode3,
                                           autofocus: false,
-                                          readOnly: true,
                                           obscureText: false,
                                           decoration: InputDecoration(
                                             isDense: true,
@@ -394,6 +527,9 @@ class _CustomerInfoWidgetState extends State<CustomerInfoWidget> {
                                           validator: _model
                                               .textController3Validator
                                               .asValidator(context),
+                                          inputFormatters: [
+                                            _model.textFieldMask3
+                                          ],
                                         ),
                                       ),
                                     ].divide(const SizedBox(width: 10.0)),
@@ -404,105 +540,81 @@ class _CustomerInfoWidgetState extends State<CustomerInfoWidget> {
                           ].divide(const SizedBox(width: 10.0)),
                         ),
                       ),
-                      Divider(
-                        thickness: 2.0,
-                        indent: 16.0,
-                        endIndent: 16.0,
-                        color: FlutterFlowTheme.of(context).alternate,
-                      ),
                       Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Divider(
+                            thickness: 2.0,
+                            indent: 16.0,
+                            endIndent: 16.0,
+                            color: FlutterFlowTheme.of(context).alternate,
+                          ),
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 16.0, 0.0),
-                            child: Text(
-                              'Interesses',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Inter',
-                                    letterSpacing: 0.0,
-                                  ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Interesses:',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ],
                             ),
                           ),
                           Builder(
                             builder: (context) {
-                              final interests =
-                                  containerCustomersRecord.interests.toList();
+                              final procedures =
+                                  _model.dropDownValue?.toList() ?? [];
 
                               return SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
-                                  children: List.generate(interests.length,
-                                          (interestsIndex) {
-                                    final interestsItem =
-                                        interests[interestsIndex];
-                                    return Stack(
-                                      alignment:
-                                          const AlignmentDirectional(1.0, -1.0),
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    8.0, 8.0, 8.0, 8.0),
-                                            child: Text(
-                                              interestsItem,
-                                              textAlign: TextAlign.center,
-                                              maxLines: 1,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                        fontSize: 12.0,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
+                                  children: List.generate(procedures.length,
+                                          (proceduresIndex) {
+                                    final proceduresItem =
+                                        procedures[proceduresIndex];
+                                    return Align(
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        alignment:
+                                            const AlignmentDirectional(0.0, 0.0),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  8.0, 8.0, 8.0, 8.0),
+                                          child: Text(
+                                            proceduresItem,
+                                            textAlign: TextAlign.center,
+                                            maxLines: 1,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontSize: 12.0,
+                                                  letterSpacing: 0.0,
+                                                ),
                                           ),
                                         ),
-                                        FlutterFlowIconButton(
-                                          borderRadius: 800.0,
-                                          buttonSize: 15.0,
-                                          fillColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .error,
-                                          icon: FaIcon(
-                                            FontAwesomeIcons.times,
-                                            color: FlutterFlowTheme.of(context)
-                                                .info,
-                                            size: 0.0,
-                                          ),
-                                          onPressed: () async {
-                                            await widget.customer!.update({
-                                              ...mapToFirestore(
-                                                {
-                                                  'interests':
-                                                      containerCustomersRecord
-                                                          .interests
-                                                          .where((e) =>
-                                                              e !=
-                                                              interestsItem)
-                                                          .toList(),
-                                                },
-                                              ),
-                                            });
-                                          },
-                                        ),
-                                      ],
+                                      ),
                                     );
                                   })
                                       .divide(const SizedBox(width: 10.0))
@@ -586,77 +698,66 @@ class _CustomerInfoWidgetState extends State<CustomerInfoWidget> {
                                           (proceduresIndex) {
                                     final proceduresItem =
                                         procedures[proceduresIndex];
-                                    return Stack(
-                                      alignment:
-                                          const AlignmentDirectional(1.0, -1.0),
-                                      children: [
-                                        Align(
+                                    return Align(
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          await showModalBottomSheet(
+                                            isScrollControlled: true,
+                                            backgroundColor: Colors.transparent,
+                                            enableDrag: false,
+                                            context: context,
+                                            builder: (context) {
+                                              return Padding(
+                                                padding:
+                                                    MediaQuery.viewInsetsOf(
+                                                        context),
+                                                child: ViewprocedureWidget(
+                                                  procedure: proceduresItem,
+                                                  customer: widget.customer!,
+                                                ),
+                                              );
+                                            },
+                                          ).then(
+                                              (value) => safeSetState(() {}));
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
                                           alignment:
                                               const AlignmentDirectional(0.0, 0.0),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color:
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    8.0, 8.0, 8.0, 8.0),
+                                            child: Text(
+                                              proceduresItem.name,
+                                              textAlign: TextAlign.center,
+                                              maxLines: 1,
+                                              style:
                                                   FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                            alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
-                                            child: Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(8.0, 8.0, 8.0, 8.0),
-                                              child: Text(
-                                                proceduresItem.name,
-                                                textAlign: TextAlign.center,
-                                                maxLines: 1,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                          fontSize: 12.0,
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        FlutterFlowIconButton(
-                                          borderRadius: 800.0,
-                                          buttonSize: 15.0,
-                                          fillColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .error,
-                                          icon: Icon(
-                                            Icons.horizontal_rule,
-                                            color: FlutterFlowTheme.of(context)
-                                                .info,
-                                            size: 0.0,
-                                          ),
-                                          onPressed: () async {
-                                            await widget.customer!.update({
-                                              ...mapToFirestore(
-                                                {
-                                                  'procedures':
-                                                      FieldValue.arrayRemove([
-                                                    getProcedimentosFirestoreData(
-                                                      updateProcedimentosStruct(
-                                                        proceduresItem,
-                                                        clearUnsetFields: false,
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        fontSize: 12.0,
+                                                        letterSpacing: 0.0,
                                                       ),
-                                                      true,
-                                                    )
-                                                  ]),
-                                                },
-                                              ),
-                                            });
-                                          },
+                                            ),
+                                          ),
                                         ),
-                                      ],
+                                      ),
                                     );
                                   })
                                       .divide(const SizedBox(width: 10.0))
@@ -672,8 +773,8 @@ class _CustomerInfoWidgetState extends State<CustomerInfoWidget> {
                   ),
                   Flexible(
                     child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
-                          16.0, 15.0, 16.0, 25.0),
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 15.0, 16.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
                           var confirmDialogResponse = await showDialog<bool>(
@@ -714,6 +815,53 @@ class _CustomerInfoWidgetState extends State<CustomerInfoWidget> {
                           iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).error,
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Inter Tight',
+                                    color: Colors.white,
+                                    letterSpacing: 0.0,
+                                  ),
+                          elevation: 0.0,
+                          borderRadius: BorderRadius.circular(16.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          await widget.customer!
+                              .update(createCustomersRecordData(
+                            name: _model.textController1.text,
+                            phone: _model.textController2.text,
+                            birthday: _model.textController3.text,
+                          ));
+                          Navigator.pop(context);
+                          await showModalBottomSheet(
+                            isScrollControlled: true,
+                            backgroundColor: Colors.transparent,
+                            enableDrag: false,
+                            context: context,
+                            builder: (context) {
+                              return Padding(
+                                padding: MediaQuery.viewInsetsOf(context),
+                                child: const ApproveWidget(),
+                              );
+                            },
+                          ).then((value) => safeSetState(() {}));
+                        },
+                        text: 'Salvar',
+                        options: FFButtonOptions(
+                          width: double.infinity,
+                          height: 40.0,
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              16.0, 0.0, 16.0, 0.0),
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme.of(context).primaryText,
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
                                     fontFamily: 'Inter Tight',

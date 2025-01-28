@@ -1,10 +1,10 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'addprocedure2_widget.dart' show Addprocedure2Widget;
+import 'addprocedure1_widget.dart' show Addprocedure1Widget;
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-class Addprocedure2Model extends FlutterFlowModel<Addprocedure2Widget> {
+class Addprocedure1Model extends FlutterFlowModel<Addprocedure1Widget> {
   ///  State fields for stateful widgets in this component.
 
   final formKey = GlobalKey<FormState>();
